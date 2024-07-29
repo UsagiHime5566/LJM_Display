@@ -15,10 +15,14 @@ MonoBehaviour:
   Database:
     Items:
     - Category: LJM
-      Name: Affiliated
-    - Category: LJM
       Name: Next
     - Category: LJM
+      Name: StartSigning
+    - Category: LJM
+      Name: ToAffiliated
+    - Category: LJM
       Name: ToHome
+    - Category: LJM
+      Name: ToSign
     - Category: None
       Name: None

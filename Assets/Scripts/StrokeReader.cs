@@ -18,7 +18,7 @@ public class StrokeReader : HimeLib.SingletonMono<StrokeReader>
         ESNetwork.instance.OnNewStrokeCome += StrokeCome;
         painterMemory.OnReplayFinished += StrokeFinished;
 
-        OutputDrawPath = Application.dataPath;
+        OutputDrawPath = Application.dataPath + "/../";
     }
 
     void StrokeCome(string compressMsg){

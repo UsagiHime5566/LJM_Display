@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using HimeLib;
 
+
+//Only Single color Draw version
 public class PaintLight : MonoBehaviour
 {
     [Header("Setting")]

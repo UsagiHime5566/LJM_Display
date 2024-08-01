@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
 using UnityEngine.UI;
 using Doozy.Runtime.UIManager.Components;
 using Doozy.Runtime.UIManager.Containers;
@@ -10,29 +11,61 @@ public class ViewHome : MonoBehaviour
 {
     public UIView VW_Self;
 
-    public List<Image> IMG_Titles;
+    [Header("介紹電影相關")]
+    public VideoPlayer ForegroundMovie;
+    public VideoPlayer IntroMovie;
+    public List<float> speedupTime;
+    public float speedupRange = 5;
+    public CanvasGroup IntroVisible;
+
+    [Header("宣言相關")]
+    public RectTransform Rect_Preword;
+    public float sizeTime = 7;
+    [SerializeField] float initRect_Width = 961;
+    [SerializeField] float initRect_Height = 545;
     void Start()
     {
+        initRect_Width = Rect_Preword.sizeDelta.x;
+        initRect_Height = Rect_Preword.sizeDelta.y;
+
         VW_Self.OnShowCallback.Event.AddListener(() => {
-            IMG_Titles[0].DOFade(1, 0);
-            IMG_Titles[1].DOFade(0, 0);
+            IntroVisible.alpha = 1;
+            SetHeight(Rect_Preword, 0);
         });
+
+        StartCoroutine(CheckMovieTime());
+    }
+
+    IEnumerator CheckMovieTime(){
+        WaitForSeconds wait = new WaitForSeconds(0.1f);
+        while(true){
+            if(IntroMovie.time > speedupTime[0] && IntroMovie.time < speedupTime[0] + speedupRange){
+                ForegroundMovie.playbackSpeed = 2;
+            } else
+            if(IntroMovie.time > speedupTime[1] && IntroMovie.time < speedupTime[1] + speedupRange){
+                ForegroundMovie.playbackSpeed = 2;
+            } else
+            if(IntroMovie.time > speedupTime[2] && IntroMovie.time < speedupTime[2] + speedupRange){
+                ForegroundMovie.playbackSpeed = 2;
+            } else {
+                ForegroundMovie.playbackSpeed = 1;
+            }
+
+            yield return wait;
+        }
     }
 
     public void StartSigning(){
         Debug.Log("Recieve OSC Starting! - " + System.DateTime.Now);
-        IMG_Titles[0].DOFade(0, 0.5f);
-        IMG_Titles[1].DOFade(1, 0.5f);
+        IntroVisible.DOFade(0, 1);
+        Rect_Preword.DOSizeDelta(new Vector2(initRect_Width, initRect_Height), sizeTime);
     }
 
-    IEnumerator LoopFade(){
-        int index = 0;
-        while(true){
-            
-            IMG_Titles[index].DOFade(0, 0.5f);
-            index = (index + 1) % IMG_Titles.Count;
-            IMG_Titles[index].DOFade(1, 0.5f);
-            yield return new WaitForSeconds(5);
-        }
+    public void SetHeight(RectTransform rectTransform, float height)
+    {
+        // 保持现有的锚点、锚定位置和宽度
+        Vector2 sizeDelta = rectTransform.sizeDelta;
+        sizeDelta.y = height;
+        rectTransform.sizeDelta = sizeDelta;
     }
 }

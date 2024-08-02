@@ -9,9 +9,11 @@ public class LJMSignalManager : HimeLib.SingletonMono<LJMSignalManager>
     public string ToSign = "ToSign";
     public string ToHome = "ToHome";
     public string ToAffiliated = "ToAffiliated";
-    void Start()
+    void Update()
     {
-
+        if(Input.GetKeyDown(KeyCode.Space)){
+            ToViewSignAnim();
+        }
     }
 
     public void ToViewAffiliated(){

@@ -24,7 +24,7 @@ public class StrokeReader : HimeLib.SingletonMono<StrokeReader>
     void StrokeCome(string compressMsg){
         string decompressedJson = DecompressString(compressMsg);
         painterMemory.paintData = JsonUtility.FromJson<PaintData>(decompressedJson);
-        painterMemory.Replay();
+        //painterMemory.Replay();
     }
 
     void StrokeFinished(){

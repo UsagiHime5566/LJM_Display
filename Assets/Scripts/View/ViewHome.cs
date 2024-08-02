@@ -29,6 +29,7 @@ public class ViewHome : MonoBehaviour
         initRect_Height = Rect_Preword.sizeDelta.y;
 
         VW_Self.OnShowCallback.Event.AddListener(() => {
+            BGMPlayer.instance.PlayMusic1();
             IntroVisible.alpha = 1;
             SetHeight(Rect_Preword, 0);
         });
@@ -55,10 +56,12 @@ public class ViewHome : MonoBehaviour
         }
     }
 
+    [EasyButtons.Button]
     public void StartSigning(){
         Debug.Log("Recieve OSC Starting! - " + System.DateTime.Now);
         IntroVisible.DOFade(0, 1);
         Rect_Preword.DOSizeDelta(new Vector2(initRect_Width, initRect_Height), sizeTime);
+        BGMPlayer.instance.PlayMusic2();
     }
 
     public void SetHeight(RectTransform rectTransform, float height)

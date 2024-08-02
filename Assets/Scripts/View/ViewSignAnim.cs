@@ -30,9 +30,12 @@ public class ViewSignAnim : MonoBehaviour
         VW_Self.OnShowCallback.Event.AddListener(() => {
             Draw_LeafAlpha.alpha = 0;
 
-            leafStep = LeafStep.LeafEntry;
             VP_Leaf.time = 0;
             VP_Leaf.Play();
+
+            StartCoroutine(StartCommand(0.1f, () => {
+                leafStep = LeafStep.LeafEntry;
+            }));
         });
 
         // painterMemory.OnReplayFinished += () => {

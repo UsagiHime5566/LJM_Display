@@ -19,6 +19,8 @@ public class ViewAffiliated : MonoBehaviour
 
     IEnumerator StayView(){
         yield return new WaitForSeconds(waitToHome);
-        LJMSignalManager.instance.ToViewHome();
+        if(VW_Self.isVisible){
+            LJMSignalManager.instance.ToViewHome();
+        }
     }
 }

@@ -62,7 +62,7 @@ public class PainterMemory : MonoBehaviour
     }
 
     public RenderTexture GetFinishedTexture(){
-        return paintLight.CombineTextures(IMG_BackImage.texture);;
+        return paintLight.CombineTextures(IMG_BackImage.texture);
     }
 
     void DrawStart(Vector2 pos){

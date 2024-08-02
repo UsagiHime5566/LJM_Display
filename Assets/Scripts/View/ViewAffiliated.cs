@@ -9,18 +9,36 @@ using DG.Tweening;
 public class ViewAffiliated : MonoBehaviour
 {
     public UIView VW_Self;
+    public SignatureManager signatureManager;
     public float waitToHome = 15;
+
+    [SerializeField] float remainTime = 15;
     void Start()
     {
         VW_Self.OnShowCallback.Event.AddListener(() => {
-            StartCoroutine(StayView());
+            remainTime = waitToHome;
+            signatureManager.VisibleSignature(true);
         });
+
+        VW_Self.OnHideCallback.Event.AddListener(() => {
+            signatureManager.VisibleSignature(false);
+        });
+
+        StartCoroutine(StayView());
     }
 
     IEnumerator StayView(){
-        yield return new WaitForSeconds(waitToHome);
-        if(VW_Self.isVisible){
-            LJMSignalManager.instance.ToViewHome();
+        while(true){
+            yield return new WaitForSeconds(1);
+            if(remainTime>= 0){
+                remainTime -= 1;
+
+                if(remainTime < 0){
+                    if(VW_Self.isVisible){
+                        LJMSignalManager.instance.ToViewHome();
+                    }
+                }
+            }
         }
     }
 }

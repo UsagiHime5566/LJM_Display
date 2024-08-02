@@ -10,7 +10,7 @@ public class LJMFileManager : HimeLib.SingletonMono<LJMFileManager>
     public string OutputDrawPath;   
     void Start()
     {
-        OutputDrawPath = Application.dataPath + "/../";
+        OutputDrawPath = Application.dataPath + "/../Signatures/";
         int pngFileCount = GetPngFileCount(OutputDrawPath);
         Debug.Log("Number of .png files: " + pngFileCount);
 

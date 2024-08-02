@@ -13,12 +13,14 @@ public class StrokeReader : HimeLib.SingletonMono<StrokeReader>
     public string OutputDrawPath;
     public string lastFileName;
 
+    public System.Action<string> OnPNGSaved;
+
     void Start(){
         paintLight.DefaultUserSettingLight();
         ESNetwork.instance.OnNewStrokeCome += StrokeCome;
         painterMemory.OnReplayFinished += StrokeFinished;
 
-        OutputDrawPath = Application.dataPath + "/../";
+        OutputDrawPath = Application.dataPath + "/../Signatures/";
     }
 
     void StrokeCome(string compressMsg){
@@ -138,6 +140,8 @@ public class StrokeReader : HimeLib.SingletonMono<StrokeReader>
         if(saveDisk){
             File.WriteAllBytes(fullPath, bytes);
             Debug.Log(bytes.Length/1024  + "Kb was saved as: " + fullPath);
+
+            OnPNGSaved?.Invoke(fullPath);
         }
 
         lastFileName = fileName;

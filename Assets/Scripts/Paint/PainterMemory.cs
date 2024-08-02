@@ -12,8 +12,10 @@ public class PainterMemory : MonoBehaviour
     public PaintLight paintLight;
     public PaintData paintData;
 
-    PaintStroke currentStroke;
+    [Header("重播參數")]
+    public int replayStepDelay = 1;
 
+    PaintStroke currentStroke;
     public System.Action OnReplayFinished;
 
     [EasyButtons.Button]
@@ -27,7 +29,7 @@ public class PainterMemory : MonoBehaviour
             for (int j = 0; j < paintData.strokes[i].drag.Count; j++)
             {
                 paintLight.DrawDragLight(paintData.strokes[i].drag[j]);
-                await Task.Delay(1);
+                await Task.Delay(replayStepDelay);
             }
             paintLight.DrawEndLight();
         }

@@ -456,6 +456,7 @@ MonoBehaviour:
   paintLight: {fileID: 180872107}
   paintData:
     strokes: []
+  replayStepDelay: 2
 --- !u!1 &348679920
 GameObject:
   m_ObjectHideFlags: 0

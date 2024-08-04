@@ -35,6 +35,7 @@ public class ViewHome : MonoBehaviour
         });
 
         StartCoroutine(CheckMovieTime());
+        StartCoroutine(LoopCheckViewState());
     }
 
     IEnumerator CheckMovieTime(){
@@ -53,6 +54,20 @@ public class ViewHome : MonoBehaviour
             }
 
             yield return wait;
+        }
+    }
+
+    IEnumerator LoopCheckViewState(){
+        while(true){
+            if(TimeArrange.instance.currentViewState == TimeArrange.ViewState.Ad){
+                var now = System.DateTime.Now;
+                if (now.Minute == 0 || now.Minute == 30)
+                {
+                    LJMSignalManager.instance.ToViewAd();
+                    yield return new WaitForSeconds(60); // 等待一分鐘以避免重複Log
+                }
+            }
+            yield return new WaitForSeconds(1);
         }
     }
 

@@ -20,7 +20,7 @@ public class StrokeReader : HimeLib.SingletonMono<StrokeReader>
         ESNetwork.instance.OnNewStrokeCome += StrokeCome;
         painterMemory.OnReplayFinished += StrokeFinished;
 
-        OutputDrawPath = Application.dataPath + "/../Signatures/";
+        OutputDrawPath = LJMFileManager.instance.OutputDrawPath;
     }
 
     void StrokeCome(string compressMsg){

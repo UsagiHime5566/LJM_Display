@@ -25,6 +25,12 @@ public class ViewSignAnim : MonoBehaviour
     [Header("參數")]
     public float waitToNextA = 15;
     public float waitToNextB = 15;
+    public float TotalWait_Debug;
+
+    private void OnValidate() {
+        TotalWait_Debug = (float)VP_Leaf.clip.length + waitToNextA + waitToNextB;
+    }
+
     void Start()
     {
         VW_Self.OnShowCallback.Event.AddListener(() => {

@@ -8,11 +8,16 @@ public class LJMSignalManager : HimeLib.SingletonMono<LJMSignalManager>
     public string Category = "LJM";
     public string ToSign = "ToSign";
     public string ToHome = "ToHome";
+    public string ToAd = "ToAd";
     public string ToAffiliated = "ToAffiliated";
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Space)){
             ToViewSignAnim();
+        }
+
+        if(Input.GetKeyDown(KeyCode.A)){
+            ToViewAd();
         }
     }
 
@@ -26,5 +31,9 @@ public class LJMSignalManager : HimeLib.SingletonMono<LJMSignalManager>
 
     public void ToViewHome(){
         SignalsService.SendSignal(Category, ToHome);
+    }
+
+    public void ToViewAd(){
+        SignalsService.SendSignal(Category, ToAd);
     }
 }

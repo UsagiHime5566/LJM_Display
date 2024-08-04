@@ -15,6 +15,8 @@ MonoBehaviour:
   Database:
     Items:
     - Category: LJM
+      Name: Ad
+    - Category: LJM
       Name: Affiliated
     - Category: LJM
       Name: Home

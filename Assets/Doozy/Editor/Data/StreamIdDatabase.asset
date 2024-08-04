@@ -19,6 +19,8 @@ MonoBehaviour:
     - Category: LJM
       Name: StartSigning
     - Category: LJM
+      Name: ToAd
+    - Category: LJM
       Name: ToAffiliated
     - Category: LJM
       Name: ToHome

@@ -7,10 +7,15 @@ using UnityEngine.UI;
 public class LJMFileManager : HimeLib.SingletonMono<LJMFileManager>
 {
     public List<Text> TXT_UserCounts;
-    public string OutputDrawPath;   
+    public string OutputDrawPath;
+
+    protected internal override void OnSingletonAwake(){
+        OutputDrawPath = Application.dataPath + "/../Signatures/";
+        CheckAndCreateFolder(OutputDrawPath);
+    }
+
     void Start()
     {
-        OutputDrawPath = Application.dataPath + "/../Signatures/";
         int pngFileCount = GetPngFileCount(OutputDrawPath);
         Debug.Log("Number of .png files: " + pngFileCount);
 
@@ -28,6 +33,21 @@ public class LJMFileManager : HimeLib.SingletonMono<LJMFileManager>
             {
                 item.text = $"連署人數：{count}人";
             }
+        }
+    }
+
+    void CheckAndCreateFolder(string path)
+    {
+        // 檢查資料夾是否存在
+        if (!Directory.Exists(path))
+        {
+            // 如果資料夾不存在，建立資料夾
+            Directory.CreateDirectory(path);
+            Debug.Log("Folder created at: " + path);
+        }
+        else
+        {
+            Debug.Log("Folder already exists at: " + path);
         }
     }
 

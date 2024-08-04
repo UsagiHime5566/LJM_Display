@@ -8,7 +8,6 @@ using System.Linq;
 public class PNGLoader : MonoBehaviour
 {
     public StrokeReader strokeReader;
-    public string folderPath = "C:/path/to/your/folder"; // 指定文件夹路径
     public List<Sprite> currentFiles;
     private string[] pngFiles;
     private int currentIndex = 0;
@@ -21,7 +20,7 @@ public class PNGLoader : MonoBehaviour
             StartCoroutine(LoadSinglePath(x));
         };
 
-        folderPath = Application.dataPath + "/../Signatures/";
+        var folderPath = LJMFileManager.instance.OutputDrawPath;
 
         // 获取文件夹中的所有PNG文件路径
         if (Directory.Exists(folderPath))

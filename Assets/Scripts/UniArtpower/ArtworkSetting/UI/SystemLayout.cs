@@ -12,6 +12,7 @@ public class SystemLayout : SingletonMono<SystemLayout>
     [Header("關閉選單")] public Button BTN_Option_Close;
     [Header("選單內容放置容器")] public CanvasGroup ContentCanvas;
     [Header("需一起隱藏物件")] public List<GameObject> needHides;
+    [Header("是否開啟ESC關閉APP")] public bool EnabledQuitApp = true;
     public bool isActive => ContentCanvas.blocksRaycasts;
     
     async void Start()
@@ -37,6 +38,11 @@ public class SystemLayout : SingletonMono<SystemLayout>
     {
         if(Input.GetKeyDown(KeyCode.F8)){
             ShowOption(!isActive);
+        }
+
+        if(Input.GetKeyDown(KeyCode.Escape) && EnabledQuitApp){
+            Debug.Log("Manual Quit App");
+            Application.Quit();
         }
     }
 

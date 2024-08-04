@@ -38,4 +38,12 @@ public class SignatureManager : MonoBehaviour
     public void VisibleSignature(bool val){
         Container.gameObject.SetActive(val);
     }
+
+    public void PageLeft(){
+
+    }
+
+    public void PageRight(){
+        
+    }
 }

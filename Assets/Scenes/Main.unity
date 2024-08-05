@@ -733,6 +733,7 @@ MonoBehaviour:
   - {fileID: 704281602}
   Container: {fileID: 1444903207}
   PrefabSignature: {fileID: 5179365181515067113, guid: 1fce4d6345cc97c4b91b720997f00bde, type: 3}
+  maxSignature: 80
 --- !u!114 &83238073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2865,7 +2866,7 @@ MonoBehaviour:
   leafStayEnd: 10
   waitToNextA: 20
   waitToNextB: 10
-  TotalWait_Debug: 42
+  TotalWait_Debug: 40.458332
 --- !u!1 &530704292
 GameObject:
   m_ObjectHideFlags: 0
@@ -2948,7 +2949,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 530704292}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 23cc4bc7d8533f442a87051d52f6fdf6, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 8d5a2dd06ccfffa40a7a3ef7e11aeca0, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -3703,7 +3704,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -6143,7 +6144,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1544590602}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 112b1234e6d10b94e9c6545bb95af181, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: fee5d5afebac0014eb35523d1c7eeb9a, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -9123,9 +9124,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3491077410636243009}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!224 &3491077410636243014
 RectTransform:

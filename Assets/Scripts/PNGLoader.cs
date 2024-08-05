@@ -12,7 +12,7 @@ public class PNGLoader : MonoBehaviour
     private string[] pngFiles;
     private int currentIndex = 0;
 
-    public System.Action<Sprite> OnSinatureLoaded;
+    public System.Action<Sprite, System.DateTime> OnSinatureLoaded;
 
     void Start()
     {
@@ -20,6 +20,10 @@ public class PNGLoader : MonoBehaviour
             StartCoroutine(LoadSinglePath(x));
         };
 
+        LoadFolderPNG();
+    }
+
+    void LoadFolderPNG(){
         var folderPath = LJMFileManager.instance.OutputDrawPath;
 
         // 获取文件夹中的所有PNG文件路径
@@ -29,7 +33,7 @@ public class PNGLoader : MonoBehaviour
 
             if (pngFiles.Length > 0)
             {
-                StartCoroutine(LoadAndDisplayImages());
+                StartCoroutine(LoadAndDisplayImages(pngFiles));
             }
             else
             {
@@ -42,29 +46,13 @@ public class PNGLoader : MonoBehaviour
         }
     }
 
-    IEnumerator LoadAndDisplayImages()
+    IEnumerator LoadAndDisplayImages(string[] files)
     {
-        for(int i = 0; i < pngFiles.Length ; i++)
+        for(int i = 0; i < files.Length ; i++)
         {
-            string filePath = "file://" + pngFiles[i];
+            string filePath = "file://" + files[i];
             //Debug.Log(filePath);
-            using (UnityWebRequest uwr = UnityWebRequestTexture.GetTexture(filePath))
-            {
-                yield return uwr.SendWebRequest();
-
-                if (uwr.result != UnityWebRequest.Result.Success)
-                {
-                    Debug.LogError("Failed to load texture: " + uwr.error);
-                }
-                else
-                {
-                    Texture2D texture = DownloadHandlerTexture.GetContent(uwr);
-                    Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
-                    currentFiles.Add(sprite);
-
-                    OnSinatureLoaded?.Invoke(sprite);
-                }
-            }
+            yield return LoadSinglePath(filePath);
         }
     }
 
@@ -83,8 +71,21 @@ public class PNGLoader : MonoBehaviour
                 Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
                 currentFiles.Add(sprite);
 
-                OnSinatureLoaded?.Invoke(sprite);
+                
+                OnSinatureLoaded?.Invoke(sprite, GetFileTime(path));
             }
+        }
+    }
+
+    System.DateTime GetFileTime(string filePath){
+        string format = "yyyyMMddHHmmss";
+        try {
+            string file = Path.GetFileNameWithoutExtension(filePath);
+            System.DateTime dTime = System.DateTime.ParseExact(file, format, null);
+            return dTime;
+            
+        } catch (System.Exception e) {
+            return new System.DateTime(1999,1,1);
         }
     }
 }

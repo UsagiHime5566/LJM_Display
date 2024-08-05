@@ -19,6 +19,14 @@ public class LJMSignalManager : HimeLib.SingletonMono<LJMSignalManager>
         if(Input.GetKeyDown(KeyCode.A)){
             ToViewAd();
         }
+
+        if(Input.GetKeyDown(KeyCode.V)){
+            ToViewAffiliated();
+        }
+
+        if(Input.GetKeyDown(KeyCode.B)){
+            ToViewHome();
+        }
     }
 
     public void ToViewAffiliated(){

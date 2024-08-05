@@ -18,7 +18,7 @@ public class StrokeReader : HimeLib.SingletonMono<StrokeReader>
     void Start(){
         paintLight.DefaultUserSettingLight();
         ESNetwork.instance.OnNewStrokeCome += StrokeCome;
-        painterMemory.OnReplayFinished += StrokeFinished;
+        //painterMemory.OnReplayFinished += StrokeFinished;
 
         OutputDrawPath = LJMFileManager.instance.OutputDrawPath;
     }
@@ -27,6 +27,12 @@ public class StrokeReader : HimeLib.SingletonMono<StrokeReader>
         string decompressedJson = DecompressString(compressMsg);
         painterMemory.paintData = JsonUtility.FromJson<PaintData>(decompressedJson);
         //painterMemory.Replay();
+
+        ConvertStrokeToPNG();
+    }
+
+    public void ConvertStrokeToPNG(){
+        SaveImgFile(painterMemory.GetDraw());
     }
 
     void StrokeFinished(){

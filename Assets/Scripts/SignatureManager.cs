@@ -18,10 +18,12 @@ public class SignatureManager : MonoBehaviour
 
     [Header("參數設定")]
     public int maxSignature = 80;
+    public float signCircle = 3.75f;
     
     void Start()
     {
         pNGLoader.OnSinatureLoaded += CreateNewSignature;
+        CheckPool();
     }
 
     void Update(){
@@ -41,7 +43,7 @@ public class SignatureManager : MonoBehaviour
         obj.name = $"{date}";
 
         //obj.gameObject.AddComponent<PolygonCollider2D>();
-        obj.gameObject.AddComponent<CircleCollider2D>();
+        obj.gameObject.AddComponent<CircleCollider2D>().radius = signCircle;
     }
 
     void CheckPool(){
@@ -86,7 +88,7 @@ public class SignatureManager : MonoBehaviour
     public void PageRight(){
         if(!Container.gameObject.activeSelf)
             return;
-            
+
         ChildPool[viewPool].gameObject.SetActive(false);
         viewPool = Mathf.Max(0, viewPool - 1);
         ChildPool[viewPool].gameObject.SetActive(true);

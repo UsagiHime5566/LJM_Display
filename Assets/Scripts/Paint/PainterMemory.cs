@@ -37,6 +37,23 @@ public class PainterMemory : MonoBehaviour
         OnReplayFinished?.Invoke();
     }
 
+    public RenderTexture GetDraw(){
+        paintLight.ClearDraw();
+        if(paintData == null) return null;
+
+        for (int i = 0; i < paintData.strokes.Count; i++)
+        {
+            paintLight.DrawStartLight(paintData.strokes[i].start);
+            for (int j = 0; j < paintData.strokes[i].drag.Count; j++)
+            {
+                paintLight.DrawDragLight(paintData.strokes[i].drag[j]);
+            }
+            paintLight.DrawEndLight();
+        }
+
+        return paintLight.CombineTextures(IMG_BackImage.texture);
+    }
+
     [EasyButtons.Button]
     public async void Clear(){
         await Task.Delay(1);

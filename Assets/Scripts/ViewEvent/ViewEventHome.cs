@@ -7,7 +7,7 @@ using Doozy.Runtime.UIManager.Components;
 using Doozy.Runtime.UIManager.Containers;
 using DG.Tweening;
 
-public class ViewHome : MonoBehaviour
+public class ViewEventHome : MonoBehaviour
 {
     public UIView VW_Self;
 
@@ -23,6 +23,8 @@ public class ViewHome : MonoBehaviour
     public float sizeTime = 7;
     [SerializeField] float initRect_Width = 961;
     [SerializeField] float initRect_Height = 545;
+
+    bool isSayShowing = false;
     void Start()
     {
         initRect_Width = Rect_Preword.sizeDelta.x;
@@ -32,10 +34,10 @@ public class ViewHome : MonoBehaviour
             BGMPlayer.instance.PlayMusic1();
             IntroVisible.alpha = 1;
             SetHeight(Rect_Preword, 0);
+            isSayShowing = false;
         });
 
         StartCoroutine(CheckMovieTime());
-        StartCoroutine(LoopCheckViewState());
     }
 
     IEnumerator CheckMovieTime(){
@@ -57,32 +59,15 @@ public class ViewHome : MonoBehaviour
         }
     }
 
-    IEnumerator LoopCheckViewState(){
-        while(true){
-            if(TimeArrange.instance.currentViewState == TimeArrange.ViewState.Ad){
-                var now = System.DateTime.Now;
-                if (now.Minute == 0 || now.Minute == 30)
-                {
-                    LJMSignalManager.instance.ToViewAd();
-                    yield return new WaitForSeconds(60); // 等待一分鐘以避免重複Log
-                }
-            }
-            yield return new WaitForSeconds(1);
-        }
-    }
-
     [EasyButtons.Button]
     public void StartSigning(){
         Debug.Log("Recieve OSC Starting! - " + System.DateTime.Now);
-        IntroVisible.DOFade(0, 1);
-        Rect_Preword.DOSizeDelta(new Vector2(initRect_Width, initRect_Height), sizeTime);
-        BGMPlayer.instance.PlayMusic2();
-    }
-
-    public void HideTopSay(){
-        BGMPlayer.instance.PlayMusic1();
-        IntroVisible.alpha = 1;
-        SetHeight(Rect_Preword, 0);
+        if(!isSayShowing){
+            IntroVisible.DOFade(0, 1);
+            Rect_Preword.DOSizeDelta(new Vector2(initRect_Width, initRect_Height), sizeTime);
+            BGMPlayer.instance.PlayMusic2();
+            isSayShowing = true;
+        }
     }
 
     public void SetHeight(RectTransform rectTransform, float height)

@@ -9,8 +9,16 @@ public class LJMFileManager : HimeLib.SingletonMono<LJMFileManager>
     public List<Text> TXT_UserCounts;
     public string OutputDrawPath;
 
+    [Header("記者會模式")]
+    public bool IsEvent;
+
     protected internal override void OnSingletonAwake(){
         OutputDrawPath = Application.dataPath + "/../Signatures/";
+
+        if(IsEvent){
+            OutputDrawPath = Application.dataPath + "/../SignaturesEvent/";
+        }
+
         CheckAndCreateFolder(OutputDrawPath);
     }
 

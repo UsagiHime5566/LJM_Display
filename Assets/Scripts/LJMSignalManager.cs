@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Doozy.Runtime.Signals;
+using UnityEngine.SceneManagement;
 
 public class LJMSignalManager : HimeLib.SingletonMono<LJMSignalManager>
 {
@@ -43,5 +44,13 @@ public class LJMSignalManager : HimeLib.SingletonMono<LJMSignalManager>
 
     public void ToViewAd(){
         SignalsService.SendSignal(Category, ToAd);
+    }
+
+    public void ToMain(){
+        SceneManager.LoadScene("Main");
+    }
+
+    public void ToEvent(){
+        SceneManager.LoadScene("MainEvent");
     }
 }

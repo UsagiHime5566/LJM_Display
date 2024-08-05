@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1870657806427640618}
   - component: {fileID: 3861726674548358740}
   m_Layer: 0
-  m_Name: Signature
+  m_Name: Signature Event
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 5179365181515067115}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -120,8 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minForce: 0.1
-  maxForce: 3
+  maxForce: 1
   minTorque: 0.1
-  maxTorque: 3
+  maxTorque: 1
   changeInterval: 1
-  angleLimit: 45
+  angleLimit: 1

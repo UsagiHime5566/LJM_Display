@@ -9,6 +9,7 @@ public class SignatureObject : MonoBehaviour
     public float minTorque = 0.1f;
     public float maxTorque = 1.0f;
     public float changeInterval = 1.0f;
+    public float angleLimit = 45f;
 
     private Rigidbody2D rb2d;
     private float nextChangeTime;
@@ -25,6 +26,23 @@ public class SignatureObject : MonoBehaviour
         {
             ApplyRandomForceAndTorque();
             nextChangeTime = Time.time + changeInterval;
+        }
+    }
+
+    void FixedUpdate() {
+        float zRotation = rb2d.rotation;
+        
+        if (zRotation > 180) zRotation -= 360; // 把角度转换到[-180, 180]范围内
+        if (zRotation < -180) zRotation += 360;
+
+        // 限制角度在[-angleLimit, angleLimit]范围内
+        if (zRotation > angleLimit)
+        {
+            rb2d.rotation = angleLimit;
+        }
+        else if (zRotation < -angleLimit)
+        {
+            rb2d.rotation = -angleLimit;
         }
     }
 

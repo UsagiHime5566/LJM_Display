@@ -50,6 +50,16 @@ public class PNGLoader : MonoBehaviour
     {
         for(int i = 0; i < files.Length ; i++)
         {
+            //改檔案名稱用
+            // string file = Path.GetFileNameWithoutExtension(files[i]);
+            // if(file.Length < 4){
+            //     string directory = Path.GetDirectoryName(files[i]);
+            //     string fileName = Path.GetFileName(files[i]);
+            //     string newFileName = "0" + fileName;
+            //     string newFilePath = Path.Combine(directory, newFileName);
+            //     File.Move(files[i], newFilePath);
+            // }
+
             string filePath = "file://" + files[i];
             //Debug.Log(filePath);
             yield return LoadSinglePath(filePath);

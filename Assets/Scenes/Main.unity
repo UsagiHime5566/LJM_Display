@@ -697,6 +697,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pNGLoader: {fileID: 83238073}
+  PrefabSignature: {fileID: 5179365181515067113, guid: 1fce4d6345cc97c4b91b720997f00bde, type: 3}
   SpawnPoints:
   - {fileID: 345227978}
   - {fileID: 1598113196}
@@ -732,7 +733,9 @@ MonoBehaviour:
   - {fileID: 1596549377}
   - {fileID: 704281602}
   Container: {fileID: 1444903207}
-  PrefabSignature: {fileID: 5179365181515067113, guid: 1fce4d6345cc97c4b91b720997f00bde, type: 3}
+  ChildPool: []
+  createPool: {fileID: 0}
+  viewPool: 0
   maxSignature: 80
 --- !u!114 &83238073
 MonoBehaviour:

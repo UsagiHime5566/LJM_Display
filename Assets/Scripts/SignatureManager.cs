@@ -55,7 +55,7 @@ public class SignatureManager : MonoBehaviour
             ChildPool.Add(newPool);
             createPool = newPool;
         } else {
-            if(createPool.childCount > maxSignature){
+            if(createPool.childCount >= maxSignature){
                 var newPool = new GameObject($"Pool {ChildPool.Count}").transform;
                 newPool.SetParent(Container);
                 newPool.gameObject.SetActive(false);
@@ -70,6 +70,7 @@ public class SignatureManager : MonoBehaviour
 
         if(val){
             viewPool = ChildPool.Count - 1;
+            CheckArrowUsage();
             ChildPool[viewPool].gameObject.SetActive(true);
         } else {
             ChildPool[viewPool].gameObject.SetActive(false);
@@ -81,7 +82,9 @@ public class SignatureManager : MonoBehaviour
             return;
 
         ChildPool[viewPool].gameObject.SetActive(false);
+        //viewPool = viewPool + 1 >= ChildPool.Count ? 0 : viewPool + 1;
         viewPool = Mathf.Min(ChildPool.Count - 1, viewPool + 1);
+        CheckArrowUsage();
         ChildPool[viewPool].gameObject.SetActive(true);
     }
 
@@ -90,7 +93,37 @@ public class SignatureManager : MonoBehaviour
             return;
 
         ChildPool[viewPool].gameObject.SetActive(false);
+        //viewPool = viewPool - 1 < 0  ? ChildPool.Count - 1 : viewPool - 1;
         viewPool = Mathf.Max(0, viewPool - 1);
+        CheckArrowUsage();
         ChildPool[viewPool].gameObject.SetActive(true);
+    }
+
+    public void CheckArrowUsage(){
+        //起點
+        if(viewPool == ChildPool.Count - 1){
+            ESNetwork.instance.SendLeftUsage(0);
+
+            //右邊有東西
+            if(ChildPool.Count > 1){
+                ESNetwork.instance.SendRightUsage(1);
+            } else {
+                ESNetwork.instance.SendRightUsage(0);
+            }
+        }
+        //最右邊
+        else if(viewPool == 0){
+            ESNetwork.instance.SendRightUsage(0);
+
+            //左邊有東西
+            if(ChildPool.Count > 1){
+                ESNetwork.instance.SendLeftUsage(1);
+            } else {
+                ESNetwork.instance.SendLeftUsage(0);
+            }
+        } else {
+            ESNetwork.instance.SendRightUsage(1);
+            ESNetwork.instance.SendLeftUsage(1);
+        }
     }
 }

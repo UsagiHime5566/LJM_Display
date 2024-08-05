@@ -22,7 +22,7 @@ public class AutoGenerateBat :MonoBehaviour
             writer.WriteLine("echo Wait for system prepare...");
             writer.WriteLine("REM no administrator privileges are needed");
             writer.WriteLine("REM PowerShell -Command \"Set-ExecutionPolicy Unrestricted\"");
-            writer.WriteLine("PowerShell -file hotspot.ps1");
+            writer.WriteLine($"PowerShell -file {exePath}\\hotspot.ps1");
             writer.WriteLine("ping 127.0.0.1 -n 10 -w 1000");
             writer.WriteLine("cd /D " + exePath);
             //writer.WriteLine("setlocal");

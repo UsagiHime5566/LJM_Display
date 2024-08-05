@@ -34,6 +34,8 @@ public class ViewAd : MonoBehaviour
     void OnADShow(){
         ESAdManager.instance.PlayClip(0);
         remainTimeToAd = TimeToTitle;
+
+        BGMPlayer.instance.Stop();
     }
 
     public void StopAD(){

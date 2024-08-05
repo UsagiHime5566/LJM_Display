@@ -25,6 +25,12 @@ public class BGMPlayer : HimeLib.SingletonMono<BGMPlayer>
         SwitchMusic(music2);
     }
 
+    public void Stop()
+    {
+        currentMusic.Stop();
+        currentMusic = null;
+    }
+
     private void SwitchMusic(AudioSource newMusic)
     {
         if (currentMusic == newMusic)

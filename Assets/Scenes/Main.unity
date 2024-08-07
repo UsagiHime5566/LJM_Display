@@ -170,6 +170,7 @@ MonoBehaviour:
   Category: LJM
   ToSign: ToSign
   ToHome: ToHome
+  AdToHome: AdToHome
   ToAd: ToAd
   ToAffiliated: ToAffiliated
 --- !u!1 &12860869
@@ -6495,7 +6496,7 @@ MonoBehaviour:
   adPaths:
   - 
   AutoNextAd: 0
-  vp_debug_speed: 5
+  vp_debug_speed: 20
   clipIndex: 00000000
   requireStop: 00
   adOrder: 
@@ -7299,6 +7300,7 @@ MonoBehaviour:
   sizeTime: 7
   initRect_Width: 961
   initRect_Height: 545
+  needAd: 0
 --- !u!114 &1709872881
 MonoBehaviour:
   m_ObjectHideFlags: 0

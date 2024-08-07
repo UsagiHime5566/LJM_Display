@@ -18,6 +18,8 @@ public class MemorySetting : MonoBehaviour
     public InputField INP_UrlAD;
     void Start()
     {
+        Application.targetFrameRate = 120;
+
         INP_DrawDelay.onValueChanged.AddListener(x => {
             if(int.TryParse(x, out int val)){
                 painterMemory.replayStepDelay = val;

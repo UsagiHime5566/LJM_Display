@@ -27,7 +27,7 @@ public class ESAdManager : HimeLib.SingletonMono<ESAdManager>
         {
             int v = i;
             adPlayers[v].loopPointReached += x => {
-                clipIndex[v] += 1;
+                //clipIndex[v] += 1;
 
                 if(requireStop[v]){
                     StopAD();
@@ -98,6 +98,7 @@ public class ESAdManager : HimeLib.SingletonMono<ESAdManager>
         adPlayers[index].url = info[clipIndex[index]].FullName;
         //adPlayers[index].time = 0;
         adPlayers[index].Play();
+        clipIndex[index] += 1;
 
         Debug.Log($"({clipIndex[index]}) file name: {info[clipIndex[index]].FullName}. / " + System.DateTime.Now);
     }

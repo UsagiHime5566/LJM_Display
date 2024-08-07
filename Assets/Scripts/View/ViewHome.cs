@@ -23,6 +23,9 @@ public class ViewHome : MonoBehaviour
     public float sizeTime = 7;
     [SerializeField] float initRect_Width = 961;
     [SerializeField] float initRect_Height = 545;
+
+    [Header("AD")]
+    [SerializeField] bool needAd;
     void Start()
     {
         initRect_Width = Rect_Preword.sizeDelta.x;
@@ -33,6 +36,8 @@ public class ViewHome : MonoBehaviour
             IntroVisible.alpha = 1;
             SetHeight(Rect_Preword, 0);
         });
+
+        needAd = false;
 
         StartCoroutine(CheckMovieTime());
         StartCoroutine(LoopCheckViewState());
@@ -63,9 +68,14 @@ public class ViewHome : MonoBehaviour
                 var now = System.DateTime.Now;
                 if (now.Minute == 0 || now.Minute == 30)
                 {
-                    LJMSignalManager.instance.ToViewAd();
-                    yield return new WaitForSeconds(60); // 等待一分鐘以避免重複Log
+                    needAd = true;
                 }
+            }
+
+            if(needAd && IntroVisible.alpha == 1){
+                LJMSignalManager.instance.ToViewAd();
+                needAd = false;
+                yield return new WaitForSeconds(60); // 等待一分鐘以避免重複Log
             }
             yield return new WaitForSeconds(1);
         }

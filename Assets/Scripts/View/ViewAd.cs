@@ -23,9 +23,12 @@ public class ViewAd : MonoBehaviour
         });
 
         VW_Self.OnShowCallback.Event.AddListener(OnADShow);
+        VW_Self.OnHideCallback.Event.AddListener(() => {
+            ESAdManager.instance.StopAD();
+        });
         
         ESAdManager.instance.OnAdEnd += x => {
-            LJMSignalManager.instance.ToViewHome();
+            LJMSignalManager.instance.ToViewHomeFromAd();
         };
 
         //StartCoroutine(LoopCheckViewState());
@@ -40,12 +43,12 @@ public class ViewAd : MonoBehaviour
 
     public void StopAD(){
         ESAdManager.instance.StopAD();
-        LJMSignalManager.instance.ToViewHome();
+        LJMSignalManager.instance.ToViewHomeFromAd();
     }
 
     public void SoftStop(){
         ESAdManager.instance.RequireStopAD(() => {
-            LJMSignalManager.instance.ToViewHome();
+            LJMSignalManager.instance.ToViewHomeFromAd();
         });
     }
 
